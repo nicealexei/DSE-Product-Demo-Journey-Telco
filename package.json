@@ -1,0 +1,18 @@
+{
+  "homepage": "https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco",
+  "name": "dse-product-demo-journey-telco",
+  "version": "1.0.0",
+  "description": "Telco demo website for Digital Pre-sales team product demo customer journey initiative",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gh-pages": "^6.1.1"
+  }
+}
