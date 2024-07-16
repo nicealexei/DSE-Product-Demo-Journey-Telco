@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.fbbf2b7c.css",
-    "main.js": "/static/js/main.82f4fbd9.js",
-    "static/js/453.fa9a3c85.chunk.js": "/static/js/453.fa9a3c85.chunk.js",
-    "static/media/revicons.eot": "/static/media/revicons.a77de540a38981833f9e.eot",
-    "static/media/revicons.ttf": "/static/media/revicons.57fd05d4ae650374c8de.ttf",
-    "static/media/revicons.woff": "/static/media/revicons.e8746a624ed098489406.woff",
+    "main.css": "DSE-Product-Demo-Journey-Telco/static/css/main.fbbf2b7c.css",
+    "main.js": "DSE-Product-Demo-Journey-Telco/static/js/main.82f4fbd9.js",
+    "static/js/453.fa9a3c85.chunk.js": "DSE-Product-Demo-Journey-Telco/static/js/453.fa9a3c85.chunk.js",
+    "static/media/revicons.eot": "DSE-Product-Demo-Journey-Telco/static/media/revicons.a77de540a38981833f9e.eot",
+    "static/media/revicons.ttf": "DSE-Product-Demo-Journey-Telco/static/media/revicons.57fd05d4ae650374c8de.ttf",
+    "static/media/revicons.woff": "DSE-Product-Demo-Journey-Telco/static/media/revicons.e8746a624ed098489406.woff",
     "index.html": "/index.html",
-    "main.fbbf2b7c.css.map": "/static/css/main.fbbf2b7c.css.map",
-    "main.82f4fbd9.js.map": "/static/js/main.82f4fbd9.js.map",
-    "453.fa9a3c85.chunk.js.map": "/static/js/453.fa9a3c85.chunk.js.map"
+    "main.fbbf2b7c.css.map": "DSE-Product-Demo-Journey-Telco/static/css/main.fbbf2b7c.css.map",
+    "main.82f4fbd9.js.map": "DSE-Product-Demo-Journey-Telco/static/js/main.82f4fbd9.js.map",
+    "453.fa9a3c85.chunk.js.map": "DSE-Product-Demo-Journey-Telco/static/js/453.fa9a3c85.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fbbf2b7c.css",
