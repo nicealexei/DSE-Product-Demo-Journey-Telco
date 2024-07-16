@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/static/css/main.6c125b62.css",
-    "main.js": "https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/static/js/main.9fcb78f6.js",
+    "main.js": "https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/static/js/main.85e4a680.js",
     "static/js/453.fa9a3c85.chunk.js": "https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/static/js/453.fa9a3c85.chunk.js",
     "static/media/revicons.eot": "https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/static/media/revicons.a77de540a38981833f9e.eot",
     "static/media/revicons.ttf": "https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/static/media/revicons.57fd05d4ae650374c8de.ttf",
     "static/media/revicons.woff": "https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/static/media/revicons.e8746a624ed098489406.woff",
     "index.html": "https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/index.html",
     "main.6c125b62.css.map": "https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/static/css/main.6c125b62.css.map",
-    "main.9fcb78f6.js.map": "https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/static/js/main.9fcb78f6.js.map",
+    "main.85e4a680.js.map": "https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/static/js/main.85e4a680.js.map",
     "453.fa9a3c85.chunk.js.map": "https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/static/js/453.fa9a3c85.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6c125b62.css",
-    "static/js/main.9fcb78f6.js"
+    "static/js/main.85e4a680.js"
   ]
 }
