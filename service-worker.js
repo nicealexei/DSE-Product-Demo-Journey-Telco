@@ -1,3 +1,6 @@
+import { initializeApp } from 'firebase/app';
+import { getMessaging, onBackgroundMessage } from 'firebase/messaging/sw';
+
 self.addEventListener('install', function(event) {
   // The service worker is installing.
 });
@@ -30,16 +33,19 @@ const firebaseConfig = {
   appId: "1:188964222220:web:d2fc465b9148a8d07ac529"
 };
 
-firebase.initializeApp(firebaseConfig);
-const messaging = firebase.messaging();
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const messaging = getMessaging(app);
 
-messaging.onBackgroundMessage((payload) => {
-  console.log('Received background message ', payload);
-  const notificationTitle = payload.notification.title;
-  const notificationOptions = {
-    body: payload.notification.body,
-    icon: '%PUBLIC_URL%/assets/images/assets/images/logo192.png'
-  };
+// Handle background messages
+onBackgroundMessage(messaging, (payload) => {
+    console.log('Received background message ', payload);
 
-  self.registration.showNotification(notificationTitle, notificationOptions);
+    const notificationTitle = payload.notification.title;
+    const notificationOptions = {
+        body: payload.notification.body,
+        icon: '%PUBLIC_URL%/assets/images/logo192.png'
+    };
+
+    self.registration.showNotification(notificationTitle, notificationOptions);
 });
