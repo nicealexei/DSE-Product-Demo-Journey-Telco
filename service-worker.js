@@ -18,14 +18,14 @@ const messaging = firebase.messaging();
 // Handle background messages
 messaging.onBackgroundMessage((payload) => {
     console.log('Received background message ', payload);
-
-    const notificationTitle = payload.notification.title;
-    const notificationOptions = {
-        body: payload.notification.body,
-        icon: '%PUBLIC_URL%/assets/images/logo192.png'
-    };
-
-    self.registration.showNotification(notificationTitle, notificationOptions);
+    if (payload.notification) {
+      const notificationTitle = payload.notification.title;
+      const notificationOptions = {
+          body: payload.notification.body,
+          icon: '%PUBLIC_URL%/assets/images/logo192.png'
+      };
+      self.registration.showNotification(notificationTitle, notificationOptions);
+  }
 });
 
 self.addEventListener('install', function(event) {
