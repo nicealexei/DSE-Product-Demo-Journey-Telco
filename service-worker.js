@@ -22,7 +22,7 @@ messaging.onBackgroundMessage((payload) => {
       const notificationTitle = payload.notification.title;
       const notificationOptions = {
           body: payload.notification.body,
-          icon: '%PUBLIC_URL%/assets/images/logo192.png'
+          icon: 'assets/images/logo192.png'
       };
       self.registration.showNotification(notificationTitle, notificationOptions);
   }
