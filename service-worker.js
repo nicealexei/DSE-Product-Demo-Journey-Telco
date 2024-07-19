@@ -1,7 +1,7 @@
 importScripts('https://www.gstatic.com/firebasejs/9.1.0/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/9.1.0/firebase-messaging-compat.js');
 
-// Your web app's Firebase configuration
+//web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDyjZ_hPS5f4MN2d8iqkUQdV7w0hFNpPko",
   authDomain: "sendnotifications-fd4ab.firebaseapp.com",
@@ -17,12 +17,13 @@ const messaging = firebase.messaging();
 
 // Handle background messages
 messaging.onBackgroundMessage((payload) => {
-    console.log('Received background message ', payload);
+    console.log('service-worker.js onBackgroundMessage - Received background message ', payload);
     if (payload.notification) {
-      const notificationTitle = payload.notification.title;
+      const notificationTitle = payload.notification.title + " (Background)";
       const notificationOptions = {
           body: payload.notification.body,
-          icon: 'assets/images/logo192.png'
+          icon: 'assets/images/logo192.png',
+          tag: payload.notification.tag
       };
       self.registration.showNotification(notificationTitle, notificationOptions);
   }
@@ -36,6 +37,7 @@ self.addEventListener('fetch', function(event) {
   // The service worker is fetching resources.
 });
 
+//remove cache
 self.addEventListener('activate', event => {
   const cacheWhitelist = [];
   event.waitUntil(
