@@ -18,7 +18,7 @@ const messaging = firebase.messaging();
 // Handle background messages
 messaging.onBackgroundMessage((payload) => {
   console.log('service-worker.js onBackgroundMessage - Received background message ', payload);
-  if (payload.data) {
+  if (payload.data && !payload.notification) {
     const notificationTitle = payload.data.title + " (Background)";
     const notificationOptions = {
         body: payload.data.body,
