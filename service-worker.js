@@ -17,6 +17,19 @@ const messaging = firebase.messaging();
 
 // Handle background messages
 messaging.onBackgroundMessage((payload) => {
+  console.log('service-worker.js onBackgroundMessage - Received background message ', payload);
+  if (payload.data) {
+    const notificationTitle = payload.data.title + " (Background)";
+    const notificationOptions = {
+        body: payload.data.body,
+        icon: 'assets/images/logo192.png',
+        tag: payload.data.tag
+    };
+    self.registration.showNotification(notificationTitle, notificationOptions);
+  }
+});
+/*
+messaging.onBackgroundMessage((payload) => {
     console.log('service-worker.js onBackgroundMessage - Received background message ', payload);
     if (payload.notification) {
       const notificationTitle = payload.notification.title + " (Background)";
@@ -28,6 +41,7 @@ messaging.onBackgroundMessage((payload) => {
       self.registration.showNotification(notificationTitle, notificationOptions);
   }
 });
+*/
 
 self.addEventListener('install', function(event) {
   // The service worker is installing.
