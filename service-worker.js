@@ -53,27 +53,14 @@ self.addEventListener('fetch', function(event) {
   // The service worker is fetching resources.
 });
 
-self.addEventListener('push', function(event) {
-  const data = event.data.json();
-  const options = {
-      body: data.body,
-      icon: data.icon || 'assets/images/logo192.png',
-      data: { url: data.url }
-  };
-  event.waitUntil(
-      self.registration.showNotification(data.title, options)
-  );
-  console.log(`addEventListener push: ${JSON.stringify(options)}`);
-});
-
 self.addEventListener('notificationclick', function(event) {
-  console.log(`notificationclick: ${JSON.stringify(event.notification)}`);
+  console.log('Notification click received:', event);
   event.notification.close();
   event.waitUntil(
       clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function(clientList) {
           for (var i = 0; i < clientList.length; i++) {
               var client = clientList[i];
-              console.log(`client.url: {client.url}`);
+              console.log('client.url', client.url);
               if (client.url === event.notification.data.url && 'focus' in client) {
                   return client.focus();
               }
@@ -81,7 +68,7 @@ self.addEventListener('notificationclick', function(event) {
           if (clients.openWindow) {
               return clients.openWindow(event.notification.data.url);
           }
-          console.log(`clients.openWindow: {clients.openWindow}`);
+          console.log('clients.openWindow:', clients.openWindow);
       })
   );
 });
