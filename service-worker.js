@@ -53,6 +53,18 @@ self.addEventListener('fetch', function(event) {
   // The service worker is fetching resources.
 });
 
+self.addEventListener('push', function(event) {
+  const data = event.data.json();
+  const options = {
+      body: data.body,
+      icon: data.icon || 'assets/images/logo192.png',
+      data: { url: data.url }
+  };
+  event.waitUntil(
+      self.registration.showNotification(data.title, options)
+  );
+});
+
 self.addEventListener('notificationclick', function(event) {
   event.notification.close();
   event.waitUntil(
@@ -67,18 +79,6 @@ self.addEventListener('notificationclick', function(event) {
               return clients.openWindow(event.notification.data.url);
           }
       })
-  );
-});
-
-self.addEventListener('push', function(event) {
-  const data = event.data.json();
-  const options = {
-      body: data.body,
-      icon: 'icon.png',
-      data: { url: data.url }
-  };
-  event.waitUntil(
-      self.registration.showNotification(data.title, options)
   );
 });
 
