@@ -18,6 +18,7 @@ const messaging = firebase.messaging();
 // Handle background messages
 messaging.onBackgroundMessage((payload) => {
   console.log('service-worker.js onBackgroundMessage - Received background message ', payload);
+  /*
   if (payload.data && !payload.notification) {
     const notificationTitle = payload.data.title + " (Background)";
     const notificationOptions = {
@@ -27,6 +28,7 @@ messaging.onBackgroundMessage((payload) => {
     };
     self.registration.showNotification(notificationTitle, notificationOptions);
   }
+    */
 });
 /*
 messaging.onBackgroundMessage((payload) => {
