@@ -53,6 +53,7 @@ self.addEventListener('fetch', function(event) {
   //content being fetched
 });
 
+/*
 self.addEventListener('notificationclick', function(event) {
   console.log('Notification click received:', event);
   event.notification.close();
@@ -72,16 +73,39 @@ self.addEventListener('notificationclick', function(event) {
       })
   );
 });
+*/
 
 self.addEventListener('message', event => {
   if (event.data && event.data.type === 'INIT_CALLBACK') {
     const callback = () => {
       console.log('Callback from Service Worker for MessageAddedIntoCase');
       // Perform callback actions here
+
+      // Check if there are any active clients
+      self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clients => {
+        if (clients.length === 0) {
+          // No active clients, PWA is in the background
+          self.registration.showNotification('Hey there from Telco!', {
+            body: 'Agent sent you a new message.',
+            icon: 'assets/images/logo192.png',
+            badge: 'assets/images/logo192.png',
+            data: {
+              url: 'https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/'
+            }
+          });
+        }
+      });
     };
 
     event.ports[0].postMessage({ type: 'CALLBACK_RESPONSE', callback: callback.toString() });
   }
+});
+
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  event.waitUntil(
+    clients.openWindow(event.notification.data.url)
+  );
 });
 
 //remove cache
