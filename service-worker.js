@@ -50,7 +50,11 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  // The service worker is fetching resources.
+  console.log('fetch event fired');
+
+  cxone('chat','onPushUpdate',['MessageDeliveredToEndUser'],() => { 
+    console.log('Message delivered to end user fired');
+  });
 });
 
 self.addEventListener('notificationclick', function(event) {
@@ -75,6 +79,7 @@ self.addEventListener('notificationclick', function(event) {
 
 //remove cache
 self.addEventListener('activate', event => {
+  console.log('clearing cache...');
   const cacheWhitelist = [];
   event.waitUntil(
     caches.keys().then(cacheNames => {
