@@ -104,24 +104,23 @@ self.addEventListener('message', event => {
   console.log('Service Worker received message:', event.data);
  
   if (event.data && event.data.type === 'CHAT_MESSAGE_POSTED') {      
-    console.log('Callback from Service Worker for MessageAddedIntoCase fired!');
-
-    let isPWAInForeground = false;
+    console.log('CHAT_MESSAGE_POSTED fired!');
+  
     self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clients => {      
+      let isPWAInForeground = false;
       for (const client of clients) {
         console.log('Client visibilityState:', client.visibilityState);
         if (client.visibilityState === 'visible') {
           isPWAInForeground = true;
           break;
         }
-      }      
+      }  
+      if (!isPWAInForeground) {
+        showNotification();
+      }
     }).catch(error => {
       console.error('Error matching clients:', error);
     });
-
-    if(!isPWAInForeground){
-      showNotification();
-    }
   }
 
   if (event.data && event.data.type === 'INIT_CALLBACK') {
