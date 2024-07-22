@@ -50,11 +50,17 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  console.log('fetch event fired');
+  //content being fetched
+});
 
-  cxone('chat','onPushUpdate',['MessageDeliveredToEndUser'],() => { 
-    console.log('Message delivered to end user fired');
-  });
+document.addEventListener('DOMContentLoaded', (event) => {
+  console.log('DOM fully loaded and parsed');
+  
+  setTimeout(() => {
+    cxone('chat', 'onPushUpdate', ['MessageDeliveredToEndUser'], () => { 
+      console.log('Message delivered to end user fired');
+    });
+  }, 2000);
 });
 
 self.addEventListener('notificationclick', function(event) {
