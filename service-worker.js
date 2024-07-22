@@ -84,37 +84,18 @@ self.addEventListener('message', event => {
   if (event.data && event.data.type === 'INIT_CALLBACK') {
     const callback = () => {
       console.log('Callback from Service Worker for MessageAddedIntoCase fired!');
-      if (!self.clients) {
-        console.error('Clients API is not available in the service worker, showing notification');       
-            self.registration.showNotification('Hey there from Telco!', {
-              body: 'Agent sent you a new message.',
-              icon: 'assets/images/logo192.png',
-              badge: 'assets/images/logo192.png',
-              data: {
-                url: 'https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/'
-              }
-            });
-        return;
-      }
-      self.clients.matchAll({ type: 'window', includeUncontrolled: true })
-        .then(clients => {
-          if (clients.length === 0) {
-            console.log('No active clients, showing notification');
-            self.registration.showNotification('Hey there from Telco!', {
-              body: 'Agent sent you a new message.',
-              icon: 'assets/images/logo192.png',
-              badge: 'assets/images/logo192.png',
-              data: {
-                url: 'https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/'
-              }
-            });
-          } else {
-            console.log('Active clients found, not showing notification');
-          }
-        })
-        .catch(error => {
-          console.error('Error matching clients:', error);
-        });
+      self.registration.showNotification('Hey there from Telco!', {
+        body: 'Agent sent you a new message.',
+        icon: 'assets/images/logo192.png',
+        badge: 'assets/images/logo192.png',
+        data: {
+          url: 'https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/'
+        }
+      }).then(() => {
+        console.log('Notification displayed successfully.');
+      }).catch(error => {
+        console.error('Error displaying notification:', error);
+      });
     };
     event.ports[0].postMessage({ type: 'CALLBACK_RESPONSE', callback: callback.toString() });
   }
