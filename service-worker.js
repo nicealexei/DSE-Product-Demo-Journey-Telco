@@ -103,12 +103,26 @@ self.addEventListener('push', event => {
 self.addEventListener('message', event => {
   console.log('Service Worker received message:', event.data);
  
-  if (event.data && event.data.type === 'CHAT_MESSAGE_POSTED') {
-   // sendNotifications();
-    showNotification();
-    console.log('sending notification...');  
-  }
+  if (event.data && event.data.type === 'CHAT_MESSAGE_POSTED') {      
+    console.log('Callback from Service Worker for MessageAddedIntoCase fired!');
 
+    let isPWAInForeground = false;
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clients => {      
+      for (const client of clients) {
+        console.log('Client visibilityState:', client.visibilityState);
+        if (client.visibilityState === 'visible') {
+          isPWAInForeground = true;
+          break;
+        }
+      }      
+    }).catch(error => {
+      console.error('Error matching clients:', error);
+    });
+
+    if(!isPWAInForeground){
+      showNotification();
+    }
+  }
 
   if (event.data && event.data.type === 'INIT_CALLBACK') {
     const callback = () => {
@@ -152,7 +166,7 @@ self.addEventListener('message', event => {
       */
 
     };
-    event.ports[0].postMessage({ type: 'CALLBACK_RESPONSE', callback: callback.toString() });
+    //event.ports[0].postMessage({ type: 'CALLBACK_RESPONSE', callback: callback.toString() });
   }
 });
 
@@ -183,8 +197,9 @@ self.addEventListener('activate', event => {
 
 // Function to show notification
 function showNotification() {
-  self.registration.showNotification('Test Notification', {
-    body: 'This is a test notification.',
+  console.log('Sending Notification...');
+  self.registration.showNotification('Hello from Telco!', {
+    body: 'Agent sent you a new message!',
     icon: 'assets/images/logo192.png',
     badge: 'assets/images/logo192.png',
     data: {
