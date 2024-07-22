@@ -79,11 +79,31 @@ self.addEventListener('notificationclick', function(event) {
 });
 */
 
+self.addEventListener('push', event => {
+  const data = event.data.json();
+  console.log('Push received:', data);
+
+  const options = {
+    body: data.body,
+    icon: 'assets/images/logo192.png',
+    badge: 'assets/images/logo192.png',
+    data: {
+      url: data.url
+    }
+  };
+
+  event.waitUntil(
+    self.registration.showNotification(data.title, options)
+  );
+});
+
 self.addEventListener('message', event => {
   console.log('Service Worker received message:', event.data);
   if (event.data && event.data.type === 'INIT_CALLBACK') {
     const callback = () => {
       console.log('Callback from Service Worker for MessageAddedIntoCase fired!');
+
+      /*
       self.registration.showNotification('Hey there from Telco!', {
         body: 'Agent sent you a new message.',
         icon: 'assets/images/logo192.png',
@@ -96,6 +116,19 @@ self.addEventListener('message', event => {
       }).catch(error => {
         console.error('Error displaying notification:', error);
       });
+      */
+
+      const data = {
+        title: 'Hey there from Telco!',
+        body: 'Agent sent you a new message.',
+        url: 'https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/'
+      };    
+      const event = new Event('push');
+      event.data = {
+        json: () => data
+      };    
+      self.dispatchEvent(event);
+
     };
     event.ports[0].postMessage({ type: 'CALLBACK_RESPONSE', callback: callback.toString() });
   }
