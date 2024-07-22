@@ -73,6 +73,17 @@ self.addEventListener('notificationclick', function(event) {
   );
 });
 
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'INIT_CALLBACK') {
+    const callback = () => {
+      console.log('Callback from Service Worker for MessageAddedIntoCase');
+      // Perform callback actions here
+    };
+
+    event.ports[0].postMessage({ type: 'CALLBACK_RESPONSE', callback: callback.toString() });
+  }
+});
+
 //remove cache
 self.addEventListener('activate', event => {
   console.log('clearing cache...');
