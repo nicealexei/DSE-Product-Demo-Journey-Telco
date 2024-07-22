@@ -53,7 +53,7 @@ self.addEventListener('fetch', function(event) {
   //content being fetched
 });
 
-document.addEventListener('DOMContentLoaded', (event) => {
+self.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOM fully loaded and parsed');
   
   setTimeout(() => {
@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       console.log('Message delivered to end user fired');
     });
   }, 2000);
+
 });
 
 self.addEventListener('notificationclick', function(event) {
