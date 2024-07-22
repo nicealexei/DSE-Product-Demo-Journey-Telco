@@ -102,17 +102,26 @@ self.addEventListener('push', event => {
 
 self.addEventListener('message', event => {
   console.log('Service Worker received message:', event.data);
+ 
+  if (event.data && event.data.type === 'START_NOTIFICATIONS') {
+    sendNotifications();
+    console.log('sending notifications...');  
+  }
+
+
   if (event.data && event.data.type === 'INIT_CALLBACK') {
     const callback = () => {
       console.log('Callback from Service Worker for MessageAddedIntoCase fired!');      
     
+      /*
       const notificationTitle = 'Hey there from Telco!';
       const notificationOptions = {
           body: 'Agent sent you a new message.',
           icon: 'assets/images/logo192.png'
       }
       self.registration.showNotification(notificationTitle, notificationOptions);
-      
+      */
+
       /*
       self.registration.showNotification('Hey there from Telco!', {
         body: 'Agent sent you a new message.',
@@ -169,3 +178,34 @@ self.addEventListener('activate', event => {
     })
   );
 });
+
+
+// Function to show notification
+function showNotification() {
+  self.registration.showNotification('Test Notification', {
+    body: 'This is a test notification.',
+    icon: 'assets/images/logo192.png',
+    badge: 'assets/images/logo192.png',
+    data: {
+      url: 'https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/'
+    }
+  }).then(() => {
+    console.log('Notification displayed successfully.');
+  }).catch(error => {
+    console.error('Error displaying notification:', error);
+  });
+}
+
+// Function to send notifications at intervals
+function sendNotifications() {
+  let count = 0;
+  const interval = setInterval(() => {
+    if (count < 5) {
+      showNotification();
+      count++;
+    } else {
+      clearInterval(interval);
+    }
+  }, 15000); // 15 seconds interval
+}
+
