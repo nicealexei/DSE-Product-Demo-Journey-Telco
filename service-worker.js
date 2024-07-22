@@ -1,3 +1,4 @@
+/*
 importScripts('https://www.gstatic.com/firebasejs/9.1.0/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/9.1.0/firebase-messaging-compat.js');
 
@@ -29,7 +30,10 @@ messaging.onBackgroundMessage((payload) => {
     self.registration.showNotification(notificationTitle, notificationOptions);
   }
     */
-});
+//});
+
+
+
 /*
 messaging.onBackgroundMessage((payload) => {
     console.log('service-worker.js onBackgroundMessage - Received background message ', payload);
