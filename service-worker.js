@@ -85,7 +85,15 @@ self.addEventListener('message', event => {
     const callback = () => {
       console.log('Callback from Service Worker for MessageAddedIntoCase fired!');
       if (!self.clients) {
-        console.error('Clients API is not available in the service worker.');
+        console.error('Clients API is not available in the service worker, showing notification');       
+            self.registration.showNotification('Hey there from Telco!', {
+              body: 'Agent sent you a new message.',
+              icon: 'assets/images/logo192.png',
+              badge: 'assets/images/logo192.png',
+              data: {
+                url: 'https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/'
+              }
+            });
         return;
       }
       self.clients.matchAll({ type: 'window', includeUncontrolled: true })
@@ -100,7 +108,6 @@ self.addEventListener('message', event => {
                 url: 'https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/'
               }
             });
-            console.log('Active clients not found, showing notification');
           } else {
             console.log('Active clients found, not showing notification');
           }
