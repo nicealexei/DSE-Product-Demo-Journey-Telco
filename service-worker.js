@@ -53,17 +53,6 @@ self.addEventListener('fetch', function(event) {
   //content being fetched
 });
 
-self.addEventListener('DOMContentLoaded', (event) => {
-  console.log('DOM fully loaded and parsed');
-  
-  setTimeout(() => {
-    cxone('chat', 'onPushUpdate', ['MessageDeliveredToEndUser'], () => { 
-      console.log('Message delivered to end user fired');
-    });
-  }, 2000);
-
-});
-
 self.addEventListener('notificationclick', function(event) {
   console.log('Notification click received:', event);
   event.notification.close();
