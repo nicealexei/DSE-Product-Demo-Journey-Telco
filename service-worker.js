@@ -80,15 +80,15 @@ self.addEventListener('notificationclick', function(event) {
 */
 
 self.addEventListener('message', event => {
+  console.log('Service Worker received message:', event.data);
   if (event.data && event.data.type === 'INIT_CALLBACK') {
     const callback = () => {
-      console.log('Callback from Service Worker for MessageAddedIntoCase');
-      // Perform callback actions here
-
+      console.log('Callback from Service Worker for MessageAddedIntoCase fired!');
       // Check if there are any active clients
       self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clients => {
         if (clients.length === 0) {
           // No active clients, PWA is in the background
+          console.log('No active clients, showing notification');
           self.registration.showNotification('Hey there from Telco!', {
             body: 'Agent sent you a new message.',
             icon: 'assets/images/logo192.png',
@@ -97,10 +97,13 @@ self.addEventListener('message', event => {
               url: 'https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/'
             }
           });
+          console.log('Active clients not found, showing notification');
+        } 
+        else {
+          console.log('Active clients found, not showing notification');
         }
       });
     };
-
     event.ports[0].postMessage({ type: 'CALLBACK_RESPONSE', callback: callback.toString() });
   }
 });
