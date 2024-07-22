@@ -79,6 +79,7 @@ self.addEventListener('notificationclick', function(event) {
 });
 */
 
+/*
 self.addEventListener('push', event => {
   const data = event.data.json();
   console.log('Push received:', data);
@@ -97,12 +98,21 @@ self.addEventListener('push', event => {
   );
 });
 
+*/
+
 self.addEventListener('message', event => {
   console.log('Service Worker received message:', event.data);
   if (event.data && event.data.type === 'INIT_CALLBACK') {
     const callback = () => {
-      console.log('Callback from Service Worker for MessageAddedIntoCase fired!');
-
+      console.log('Callback from Service Worker for MessageAddedIntoCase fired!');      
+    
+      const notificationTitle = 'Hey there from Telco!';
+      const notificationOptions = {
+          body: 'Agent sent you a new message.',
+          icon: 'assets/images/logo192.png'
+      }
+      self.registration.showNotification(notificationTitle, notificationOptions);
+      
       /*
       self.registration.showNotification('Hey there from Telco!', {
         body: 'Agent sent you a new message.',
@@ -118,6 +128,7 @@ self.addEventListener('message', event => {
       });
       */
 
+      /*
       const data = {
         title: 'Hey there from Telco!',
         body: 'Agent sent you a new message.',
@@ -128,6 +139,7 @@ self.addEventListener('message', event => {
         json: () => data
       };    
       self.dispatchEvent(event);
+      */
 
     };
     event.ports[0].postMessage({ type: 'CALLBACK_RESPONSE', callback: callback.toString() });
