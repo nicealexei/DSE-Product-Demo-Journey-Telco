@@ -103,9 +103,10 @@ self.addEventListener('push', event => {
 self.addEventListener('message', event => {
   console.log('Service Worker received message:', event.data);
  
-  if (event.data && event.data.type === 'START_NOTIFICATIONS') {
-    sendNotifications();
-    console.log('sending notifications...');  
+  if (event.data && event.data.type === 'CHAT_MESSAGE_POSTED') {
+   // sendNotifications();
+    showNotification();
+    console.log('sending notification...');  
   }
 
 
