@@ -97,7 +97,6 @@ self.addEventListener('push', event => {
     self.registration.showNotification(data.title, options)
   );
 });
-
 */
 
 self.addEventListener('message', event => {
@@ -121,51 +120,6 @@ self.addEventListener('message', event => {
     }).catch(error => {
       console.error('Error matching clients:', error);
     });
-  }
-
-  if (event.data && event.data.type === 'INIT_CALLBACK') {
-    const callback = () => {
-      console.log('Callback from Service Worker for MessageAddedIntoCase fired!');      
-    
-      /*
-      const notificationTitle = 'Hey there from Telco!';
-      const notificationOptions = {
-          body: 'Agent sent you a new message.',
-          icon: 'assets/images/logo192.png'
-      }
-      self.registration.showNotification(notificationTitle, notificationOptions);
-      */
-
-      /*
-      self.registration.showNotification('Hey there from Telco!', {
-        body: 'Agent sent you a new message.',
-        icon: 'assets/images/logo192.png',
-        badge: 'assets/images/logo192.png',
-        data: {
-          url: 'https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/'
-        }
-      }).then(() => {
-        console.log('Notification displayed successfully.');
-      }).catch(error => {
-        console.error('Error displaying notification:', error);
-      });
-      */
-
-      /*
-      const data = {
-        title: 'Hey there from Telco!',
-        body: 'Agent sent you a new message.',
-        url: 'https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/'
-      };    
-      const event = new Event('push');
-      event.data = {
-        json: () => data
-      };    
-      self.dispatchEvent(event);
-      */
-
-    };
-    //event.ports[0].postMessage({ type: 'CALLBACK_RESPONSE', callback: callback.toString() });
   }
 });
 
@@ -200,10 +154,13 @@ function showNotification() {
   self.registration.showNotification('Hello from Telco!', {
     body: 'Agent sent you a new message!',
     icon: 'assets/images/logo192.png',
-    badge: 'assets/images/logo192.png',
+    badge: 'assets/images/logo192.png'
+    /*
+    ,
     data: {
       url: 'https://nicealexei.github.io/DSE-Product-Demo-Journey-Telco/'
     }
+      */
   }).then(() => {
     console.log('Notification displayed successfully.');
   }).catch(error => {
@@ -223,4 +180,3 @@ function sendNotifications() {
     }
   }, 15000); // 15 seconds interval
 }
-
