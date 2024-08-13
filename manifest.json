@@ -1,7 +1,7 @@
 {
-  "short_name": "Telco PWA",
-  "name": "Telco Demo Website PWA",
-  "description": "Telco Demo Website for Digital Presales - Progressive Web App",
+  "short_name": "OneTel PWA",
+  "name": "OneTel Demo Website PWA",
+  "description": "OneTel Demo Website for Digital Presales - Progressive Web App",
   "icons": [
     {
       "src": "assets/images/favicon.ico",
