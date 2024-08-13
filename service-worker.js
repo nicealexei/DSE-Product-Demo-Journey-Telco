@@ -151,8 +151,8 @@ self.addEventListener('activate', event => {
 // Function to show notification
 function showNotification() {
   console.log('Sending Notification...');
-  self.registration.showNotification('Hello from Telco!', {
-    body: 'Agent sent you a new message!',
+  self.registration.showNotification('Hey there!', {
+    body: 'Agent sent you a new message.',
     icon: 'assets/images/logo192.png',
     badge: 'assets/images/logo192.png'
     /*
